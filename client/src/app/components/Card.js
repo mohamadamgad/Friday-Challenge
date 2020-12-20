@@ -31,7 +31,7 @@ const CardContainer = styled.div`
 `;
 const Main = styled.div`
     display: grid;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 8px;
     grid-template-columns: 100px 100px 100px;
     grid-template-rows: 80px 80px;

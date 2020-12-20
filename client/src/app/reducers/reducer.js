@@ -1,4 +1,5 @@
-import { setCars, GET_CARS } from "./actions";
+import { setCars, GET_CARS } from "../actions/actions";
+import { getVehicles } from "../services/api";
 
 const initialState = {
     data: [],
@@ -16,8 +17,6 @@ export const reducer = (state = initialState, action) => {
 };
 
 export const loadCars = (make, model) => async (dispatch, getState) => {
-    const vehicles = await fetch(
-        `http://localhost:8080/api/vehicles?make=${make}&model=${model}`
-    ).then(res => res.json());
+    const vehicles = await getVehicles(make, model);
     dispatch(setCars(vehicles));
 };

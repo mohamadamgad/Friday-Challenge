@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { loadCars } from "../reducer";
+import { loadCars } from "../reducers/reducer";
 import styled from "styled-components";
 import { Card } from "./Card";
+import { getMakes, getModels } from "../services/api";
 
 export function HomePage() {
     const [makes, setMakes] = useState([]);
@@ -16,8 +16,8 @@ export function HomePage() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        (async function anyNameFunction() {
-            const res = await axios.get(`http://localhost:8080/api/makes`);
+        (async function getAllMakes() {
+            const res = await getMakes();
 
             setMakes(res.data);
         })();
@@ -25,9 +25,7 @@ export function HomePage() {
 
     async function handleMake(e) {
         const make = e.target.value;
-        const res = await axios.get(
-            `http://localhost:8080/api/models?make=${make}`
-        );
+        const res = await getModels(make);
         setModels(res.data);
         setSelectedMake(make);
     }
@@ -87,7 +85,7 @@ const SearchContainr = styled.div`
 
 const SearchButton = styled.button`
     background: #23cba7;
-    border: 0.5px solid #ddd;
+    border: 0.5px solid #ccc;
     border-radius: 7px;
     color: #fff;
     cursor: pointer;
