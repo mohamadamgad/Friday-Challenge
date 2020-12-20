@@ -1,5 +1,5 @@
 import "./App.css";
-import { HomePage } from "./components/Homepage";
+import { HomePage } from "./app/components/Homepage";
 
 function App() {
     return <HomePage />;

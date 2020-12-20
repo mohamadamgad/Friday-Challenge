@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import { loadCars } from "../reducer";
 import { Card } from "./Card";
 
 export function HomePage() {
     const [makes, setMakes] = useState([]);
     const [models, setModels] = useState([]);
-    const [vehicles, setVehicles] = useState([]);
 
     const [selectedMake, setSelectedMake] = useState("");
     const [selectedModel, setSelectedModel] = useState("");
+
+    const vehicles = useSelector(state => state.data);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         (async function anyNameFunction() {
@@ -20,7 +23,6 @@ export function HomePage() {
     }, []);
 
     async function handleMake(e) {
-        console.log("Selected Make", e.target.value);
         const make = e.target.value;
         const res = await axios.get(
             `http://localhost:8080/api/models?make=${make}`
@@ -36,12 +38,11 @@ export function HomePage() {
     }
 
     async function searchVehicles() {
-        console.log(selectedMake, selectedModel);
-        const res = await axios.get(
-            `http://localhost:8080/api/vehicles?make=${selectedMake}&model=${selectedModel}`
-        );
-        console.log("caaarrs", res.data);
-        setVehicles(res.data);
+        dispatch(loadCars(selectedMake, selectedModel));
+        // const res = await axios.get(
+        //     `http://localhost:8080/api/vehicles?make=${selectedMake}&model=${selectedModel}`
+        // );
+        // setVehicles(res.data);
     }
 
     return (
