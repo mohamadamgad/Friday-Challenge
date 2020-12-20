@@ -12,7 +12,7 @@ export function HomePage() {
     const [selectedMake, setSelectedMake] = useState("");
     const [selectedModel, setSelectedModel] = useState("");
 
-    const vehicles = useSelector(state => state.data);
+    const vehicles = useSelector(state => state);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -34,7 +34,6 @@ export function HomePage() {
 
     function handleModel(e) {
         const model = e.target.value;
-        console.log("modeeeeel", model);
         setSelectedModel(model);
     }
 
@@ -72,7 +71,10 @@ export function HomePage() {
                 <SearchButton onClick={searchVehicles}>Search</SearchButton>
             </SearchContainr>
 
-            <Card vehicles={vehicles} />
+            {vehicles.pending === false && vehicles.data.length === 0 && (
+                <EmptyState> No vehicles available</EmptyState>
+            )}
+            <Card vehicles={vehicles.data} />
         </div>
     );
 }
@@ -98,4 +100,10 @@ const DropDown = styled.select`
     border: 1px solid #ccc;
     border-radius: 6px;
     position: relative;
+`;
+
+const EmptyState = styled.div`
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
 `;

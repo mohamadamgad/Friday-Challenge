@@ -1,13 +1,14 @@
 import { setCars, GET_CARS } from "./actions";
 
 const initialState = {
-    data: []
+    data: [],
+    pending: true
 };
 
 export const reducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_CARS: {
-            return { ...state, data: action.payload };
+            return { ...state, data: action.payload, pending: false };
         }
         default:
             return state;
