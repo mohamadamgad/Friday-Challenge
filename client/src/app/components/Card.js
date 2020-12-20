@@ -27,12 +27,15 @@ const CardContainer = styled.div`
     grid-gap: 1rem;
     column-gap: 15px;
     row-gap: 15px;
+    margin: 0 20px;
 `;
 const Main = styled.div`
     display: grid;
-    border: 1px solid;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     grid-template-columns: 100px 100px 100px;
     grid-template-rows: 80px 80px;
     column-gap: 15px;
     row-gap: 15px;
+    text-align: center;
 `;

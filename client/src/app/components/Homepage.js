@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { loadCars } from "../reducer";
+import styled from "styled-components";
 import { Card } from "./Card";
 
 export function HomePage() {
@@ -39,41 +40,62 @@ export function HomePage() {
 
     async function searchVehicles() {
         dispatch(loadCars(selectedMake, selectedModel));
-        // const res = await axios.get(
-        //     `http://localhost:8080/api/vehicles?make=${selectedMake}&model=${selectedModel}`
-        // );
-        // setVehicles(res.data);
     }
 
     return (
         <div>
-            <select id="makes" onChange={e => handleMake(e)}>
-                <option>Select Make</option>
-                {makes.length > 0 &&
-                    makes.map((make, index) => {
-                        return (
-                            <option value={make} key={index}>
-                                {make}
-                            </option>
-                        );
-                    })}
-            </select>
+            <SearchContainr>
+                <DropDown id="makes" onChange={e => handleMake(e)}>
+                    <option>Select Make</option>
+                    {makes.length > 0 &&
+                        makes.map((make, index) => {
+                            return (
+                                <option value={make} key={index}>
+                                    {make}
+                                </option>
+                            );
+                        })}
+                </DropDown>
 
-            <select id="models" onChange={e => handleModel(e)}>
-                <option>Select Model</option>
-                {models.length > 0 &&
-                    models.map((model, index) => {
-                        return (
-                            <option value={model} key={index}>
-                                {model}
-                            </option>
-                        );
-                    })}
-            </select>
+                <DropDown id="models" onChange={e => handleModel(e)}>
+                    <option>Select Model</option>
+                    {models.length > 0 &&
+                        models.map((model, index) => {
+                            return (
+                                <option value={model} key={index}>
+                                    {model}
+                                </option>
+                            );
+                        })}
+                </DropDown>
 
-            <button onClick={searchVehicles}>Search</button>
+                <SearchButton onClick={searchVehicles}>Search</SearchButton>
+            </SearchContainr>
 
             <Card vehicles={vehicles} />
         </div>
     );
 }
+
+const SearchContainr = styled.div`
+    margin: 40px 0;
+    display: flex;
+    justify-content: center;
+`;
+
+const SearchButton = styled.button`
+    background: #23cba7;
+    border: 0.5px solid #ddd;
+    border-radius: 7px;
+    color: #fff;
+    cursor: pointer;
+`;
+const DropDown = styled.select`
+    margin-right: 10px;
+    font-size: 13px;
+    padding: 6px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    position: relative;
+`;
