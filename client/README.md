@@ -1,3 +1,19 @@
+# Problem
+
+The problem here is to display the choices of make, models of cars for the users, and they can select their car.
+
+# Solution
+
+Show the makes and models in dropdown list for the users, and they can then search for the selected on. After a search is executed, the list of cars is displayed.
+
+# Structure
+
+The App consists of:
+
+-   Components folder: Has all the main react components for the app.
+-   Services folder: Has the api function calls
+-   Store, Actions, Reducers folders: Has the redux state management flow of the app
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
